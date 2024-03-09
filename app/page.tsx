@@ -2,7 +2,7 @@
 export default function Home() {
   return (
     <>
-      <h1>Welocome to th Project</h1>
+      <h1>Welcome to the Project</h1>
     </>
   );
 }

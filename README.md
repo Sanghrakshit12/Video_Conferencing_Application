@@ -2,5 +2,5 @@ Welcome to NexMeet, your all-in-one solution for immersive and seamless video co
 
 ## Getting Started
 
-npm install
-npm run dev
+-npm install
+-npm run dev
