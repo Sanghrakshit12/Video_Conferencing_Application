@@ -7,7 +7,7 @@ import { Button } from "../ui/button"
 import {Form,FormControl,FormField,FormItem,FormLabel,FormMessage} from "../ui/form"
 import {Input} from "../ui/input"
 import {signIn} from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 
 export default function SignInComponent() {
 
@@ -18,26 +18,34 @@ const FormSchema = z.object({
   password:z.string().min(8,{message:"password must contain atleat 8 character"})
 })
 
-  const router=useRouter();
+  
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       username: "",password:""
     }
   })
-  
+  const router=useRouter();
   async function onSubmit(values:z.infer<typeof FormSchema>){
-    const signindata=await signIn('credentials',{
-      username:values.username,
-      password:values.password
-    })
-    if(signindata?.error){
-      console.log(signindata.error)
+   
+    try{
+      const signindata=await signIn('credentials',{
+        username:values.username,
+        password:values.password,
+        redirect:false
+      })
+      if(signindata?.error){
+        console.log(signindata.error)
+      }
+      else{
+        console.log(signindata)
+        router.push('/')
+      }
     }
-    else{
-      router.push("/")
+    catch(err){
+      router.push("/autherr");
     }
-    console.log(signindata);
+    
   }
   return (
     <Form {...form}>

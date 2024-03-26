@@ -2,25 +2,33 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import db from "@/db"
 import { compare } from "bcrypt";
-import { NextResponse } from "next/server";
+import { NextAuthOptions } from "next-auth";
+import { Session } from "inspector";
 
-export const Next_Auth_Config = {
+export const Next_Auth_Config: NextAuthOptions = {
     // pages: {
     //     signIn: "/signin"
     // },
     adapter: PrismaAdapter(db),
+    session: {
+        strategy: "jwt"
+    },
     providers: [
         CredentialsProvider({
             name: "username",
             credentials: {
-                username: { label: "Username", type: "text", placeholder: "username" },
+                username: {
+                    label: "Username",
+                    type: "text",
+                    placeholder: "username"
+                },
                 password: {
                     label: "password",
                     type: "password",
                     placeholder: "password"
                 },
             },
-            async authorize(credentials: any) {
+            async authorize(credentials) {
                 try {
                     if (!credentials?.username || !credentials?.password) {
                         return null;
@@ -43,18 +51,34 @@ export const Next_Auth_Config = {
                         username: existingUser.username
                     }
                 }
-                catch(err) {
-                    console.log("fuck off")
+                catch (err) {
+                    console.log("Error in Signin")
                     return null;
                 }
-        }
+            }
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
+
     callbacks: {
-        jwt: ({ token }: any) => {
-            console.log(token)
+        async jwt({ token, user }) {
+            if (user) {
+                return {
+                    ...token,
+                    username: user.username
+                }
+            }
             return token;
+        },
+        async session({ session, token }) {
+            return {
+                ...session,
+                user: {
+                    ...session.user,
+                    username: token.username
+                }
+            }
+            return session
         }
-    }
+    } 
 }
