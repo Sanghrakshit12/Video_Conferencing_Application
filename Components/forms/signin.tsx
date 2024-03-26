@@ -36,6 +36,7 @@ const FormSchema = z.object({
       })
       if(signindata?.error){
         console.log(signindata.error)
+        router.push("/AuthError");
       }
       else{
         window.alert("SignIn Successful")
@@ -43,7 +44,7 @@ const FormSchema = z.object({
       }
     }
     catch(err){
-      router.push("/autherr");
+      router.push("/AuthError");
     }
     
   }

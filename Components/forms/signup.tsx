@@ -51,7 +51,7 @@ export default function SignUpComponent() {
     }
   catch(err){
     console.log("Sign-up Failed");
-    router.push("/autherror")
+    router.push("/AuthError")
   }
     
   }
