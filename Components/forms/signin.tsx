@@ -4,15 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "../ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form"
+import {Form,FormControl,FormField,FormItem,FormLabel,FormMessage} from "../ui/form"
 import {Input} from "../ui/input"
+import {signIn} from "next-auth/react"
+import { useRouter } from "next/navigation"
+
+export default function SignInComponent() {
 
 const FormSchema = z.object({
   username: z.string().min(1, {
@@ -21,17 +18,26 @@ const FormSchema = z.object({
   password:z.string().min(8,{message:"password must contain atleat 8 character"})
 })
 
-
-
-export default function SignInComponent() {
+  const router=useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       username: "",password:""
     }
   })
-  function onSubmit(values:z.infer<typeof FormSchema>){
-    console.log(values)
+  
+  async function onSubmit(values:z.infer<typeof FormSchema>){
+    const signindata=await signIn('credentials',{
+      username:values.username,
+      password:values.password
+    })
+    if(signindata?.error){
+      console.log(signindata.error)
+    }
+    else{
+      router.push("/")
+    }
+    console.log(signindata);
   }
   return (
     <Form {...form}>
