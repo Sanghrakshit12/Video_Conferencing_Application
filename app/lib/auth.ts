@@ -54,10 +54,11 @@ export const Next_Auth_Config: NextAuthOptions = {
                     console.log("Error in Signin")
                     return null;
                 }
-            }
+            },
+
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
+   
 
-    
 }
