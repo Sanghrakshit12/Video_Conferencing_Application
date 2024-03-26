@@ -38,8 +38,8 @@ const FormSchema = z.object({
         console.log(signindata.error)
       }
       else{
-        console.log(signindata)
-        router.push('/')
+        window.alert("SignIn Successful")
+        router.push('/admin')
       }
     }
     catch(err){
