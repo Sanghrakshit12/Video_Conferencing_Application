@@ -4,4 +4,3 @@ Welcome to NexMeet, your all-in-one solution for immersive and seamless video co
 
 -npm install
 -npm run dev
-change
