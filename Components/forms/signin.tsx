@@ -4,80 +4,80 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "../ui/button"
-import {Form,FormControl,FormField,FormItem,FormLabel,FormMessage} from "../ui/form"
-import {Input} from "../ui/input"
-import {signIn} from "next-auth/react"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
+import { Input } from "../ui/input"
+import { signIn } from "next-auth/react"
 import { redirect, useRouter } from "next/navigation"
 
 export default function SignInComponent() {
 
-const FormSchema = z.object({
-  username: z.string().min(1, {
-    message: "email is Required"
-  }).email('Invalid email'),
-  password:z.string().min(8,{message:"password must contain atleat 8 character"})
-})
+  const FormSchema = z.object({
+    username: z.string().min(1, {
+      message: "email is Required"
+    }).email('Invalid email'),
+    password: z.string().min(8, { message: "password must contain atleat 8 character" })
+  })
 
-  
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: "",password:""
+      username: "", password: ""
     }
   })
-  const router=useRouter();
-  async function onSubmit(values:z.infer<typeof FormSchema>){
-   
-    try{
-      const signindata=await signIn('credentials',{
-        username:values.username,
-        password:values.password,
-        redirect:false
+  const router = useRouter();
+  async function onSubmit(values: z.infer<typeof FormSchema>) {
+
+    try {
+      const signindata = await signIn('credentials', {
+        username: values.username,
+        password: values.password,
+        redirect: false
       })
-      if(signindata?.error){
+      if (signindata?.error) {
         console.log(signindata.error)
         router.push("/AuthError");
       }
-      else{
+      else {
         window.alert("SignIn Successful")
         router.push('/admin')
       }
     }
-    catch(err){
+    catch (err) {
       router.push("/AuthError");
     }
-    
+
   }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full p-6">
         <div>
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input type="email" placeholder="mail@example.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-         <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="mail@example.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input type="password" placeholder="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
         <Button className="w-full mt-5" type="submit">Sign In</Button>
       </form>

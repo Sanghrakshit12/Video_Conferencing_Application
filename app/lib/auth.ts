@@ -36,7 +36,7 @@ export const Next_Auth_Config: NextAuthOptions = {
                         where: { username: credentials.username }
                     });
                     if (!existingUser) {
-                        console.log("fuck off")
+                        console.log("User already Exist")
                         return null;
                     }
                     const passwordMatch = await compare(credentials.password, existingUser.password);
@@ -46,8 +46,8 @@ export const Next_Auth_Config: NextAuthOptions = {
                     }
                     return {
                         id: `${existingUser.id}`,
-                        Name: existingUser.Name,
-                        username: existingUser.username
+                        name: existingUser.Name,
+                        email: existingUser.username
                     }
                 }
                 catch (err) {
@@ -59,6 +59,9 @@ export const Next_Auth_Config: NextAuthOptions = {
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
-   
-
+    callbacks:{
+        async session({session}){
+            return session
+            }
+        }
 }

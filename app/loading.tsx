@@ -1,7 +1,9 @@
-export default function () {
+import { Loader2 } from "lucide-react";
+
+export default function Myloader() {
   return (
-    <>
-      <h1>loading......</h1>
-    </>
+    <div className="flex h-screen items-center justify-center">
+      <Loader2 className="mx-auto animate-spin" />
+    </div>
   );
 }
