@@ -15,6 +15,7 @@ import {
 import { Input } from "../ui/input"
 import axios from "axios"
 import { useRouter } from "next/navigation"
+import { useToast } from "../ui/use-toast"
 
 const FormSchema = z.object({
   Name: string().min(1, "Required"),
@@ -30,7 +31,8 @@ const FormSchema = z.object({
 
 
 export default function SignUpComponent() {
-  const router=useRouter()
+  const router = useRouter()
+  const {toast}=useToast();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -38,22 +40,28 @@ export default function SignUpComponent() {
     }
   })
   async function onSubmit(values: z.infer<typeof FormSchema>) {
-    try{
-      const headers={'Content-type':'application-json'}
-      const resposnse=await axios.post("http://localhost:3000/api/user",{
-        Name:values.Name,
-        username:values.username,
-        password:values.password
-      },{headers:{'Content-type':'application-json'}}
+    try {
+      const headers = { 'Content-type': 'application-json' }
+      const resposnse = await axios.post("http://localhost:3000/api/user", {
+        Name: values.Name,
+        username: values.username,
+        password: values.password
+      }, { headers: { 'Content-type': 'application-json' } }
       )
-      window.alert("Successfully Signed up Please Sign In to Use the Application")
+      toast({
+        title: "Hello From NexMeet",
+        description: "Sign Up Successful",
+      })
       router.push('/signin')
     }
-  catch(err){
-    console.log("Sign-up Failed");
-    router.push("/AuthError")
-  }
-    
+    catch (err) {
+      toast({
+        title: "Oops! Something Went Wrong",
+        description: "Error Signing Up",
+      })
+      router.push("/AuthError")
+    }
+
   }
   return (
     <Form {...form}>

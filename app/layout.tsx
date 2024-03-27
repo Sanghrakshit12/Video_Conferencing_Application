@@ -5,6 +5,7 @@ import Navbar from "@/Components/navbar";
 import Provider from "./lib/provider";
 import { getServerSession } from "next-auth";
 import { Next_Auth_Config } from "./lib/auth";
+import { Toaster } from "@/Components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,7 @@ export default async function RootLayout({
             <Navbar />
             <div>{children}</div>
           </Provider>
-
+          <Toaster />
         </main>
 
       </body>

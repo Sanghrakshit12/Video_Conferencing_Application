@@ -7,7 +7,9 @@ import { Button } from "../ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
 import { signIn } from "next-auth/react"
-import { redirect, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { useToast } from "../ui/use-toast"
+
 
 export default function SignInComponent() {
 
@@ -17,7 +19,7 @@ export default function SignInComponent() {
     }).email('Invalid email'),
     password: z.string().min(8, { message: "password must contain atleat 8 character" })
   })
-
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -36,10 +38,17 @@ export default function SignInComponent() {
       })
       if (signindata?.error) {
         console.log(signindata.error)
-        router.push("/AuthError");
+        toast({
+          title: "Oops! Something Went Wrong",
+          description: "Error Signing In",
+        })
+        router.push("/");
       }
       else {
-        window.alert("SignIn Successful")
+        toast({
+          title: "Hello From NexMeet",
+          description: "Sign In Successful",
+        })
         router.push('/admin')
       }
     }

@@ -3,13 +3,18 @@ import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import { buttonVariants } from '../ui/button'
 import { Button } from '../ui/button'
-
+import { useToast } from '../ui/use-toast'
 
 const AuthButtons = () => {
     const { data: session } = useSession()
+    const {toast}=useToast()
 
     const handleLogout = async () => {
         await signOut({ redirect: false, callbackUrl: '/' })
+        toast({
+            title: "Logged Out Successfully",
+            description: "See you Soon",
+          })
 
         window.location.replace('/')
     }
