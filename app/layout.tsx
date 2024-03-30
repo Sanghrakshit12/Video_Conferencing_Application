@@ -11,7 +11,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "NexMeet",
-  description: "Welcome to NexMeet, your all-in-one solution for immersive and seamless video conferencing. Built with cutting-edge NexJS technology, NexMeet redefines the virtual collaboration experience, making remote meetings as effective and engaging as in-person interactions",
+  description:
+    "Welcome to NexMeet, your all-in-one solution for immersive and seamless video conferencing. Built with cutting-edge NexJS technology, NexMeet redefines the virtual collaboration experience, making remote meetings as effective and engaging as in-person interactions",
 };
 
 export default async function RootLayout({
@@ -19,21 +20,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const session=await getServerSession(Next_Auth_Config);
+  const session = await getServerSession(Next_Auth_Config);
   console.log(session);
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="h-screen flex flex-col justify-center items-center">
-
+        <main className="flex h-screen flex-col items-center justify-center">
           <Provider session={session}>
             <Navbar />
             <div>{children}</div>
           </Provider>
           <Toaster />
         </main>
-
       </body>
     </html>
   );

@@ -59,9 +59,9 @@ export const Next_Auth_Config: NextAuthOptions = {
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
-    callbacks:{
-        async session({session}){
+    callbacks: {
+        async session({ session }) {
             return session
-            }
         }
+    }
 }

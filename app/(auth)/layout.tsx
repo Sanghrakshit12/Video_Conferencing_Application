@@ -1,14 +1,12 @@
-import { ReactNode } from "react"
-import { FC } from "react"
+import { ReactNode } from "react";
+import { FC } from "react";
 
-interface Auth_LayoutProps{
-    children :ReactNode
+interface Auth_LayoutProps {
+  children: ReactNode;
 }
 
-const Auth_Layout:FC<Auth_LayoutProps>=({children})=>{
-return <div className="bg-slate-300 p-10 rounded-md">
-    {children}
-</div>
-}
+const Auth_Layout: FC<Auth_LayoutProps> = ({ children }) => {
+  return <div className="rounded-md bg-slate-300 p-10">{children}</div>;
+};
 
 export default Auth_Layout;

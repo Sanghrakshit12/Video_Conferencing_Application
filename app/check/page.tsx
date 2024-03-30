@@ -5,7 +5,6 @@ async function getUserdata() {
   return response.data;
 }
 
-
 export default async function Home() {
   const userData = await getUserdata();
 
