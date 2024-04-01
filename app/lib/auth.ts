@@ -36,7 +36,7 @@ export const Next_Auth_Config: NextAuthOptions = {
                         where: { username: credentials.username }
                     });
                     if (!existingUser) {
-                        console.log("User already Exist")
+                        console.log("User Dosen't Exist")
                         return null;
                     }
                     const passwordMatch = await compare(credentials.password, existingUser.password);

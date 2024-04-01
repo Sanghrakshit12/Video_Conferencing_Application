@@ -70,7 +70,7 @@ export default function SignUpComponent() {
         title: "Oops! Something Went Wrong",
         description: "Error Signing Up",
       });
-      router.push("/AuthError");
+      router.push("/");
     }
   }
   return (
