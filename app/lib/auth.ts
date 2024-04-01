@@ -27,7 +27,7 @@ export const Next_Auth_Config: NextAuthOptions = {
                     placeholder: "password"
                 },
             },
-            async authorize(credentials) {
+            async authorize(credentials):Promise<any> {
                 try {
                     if (!credentials?.username || !credentials?.password) {
                         return null;
@@ -60,8 +60,23 @@ export const Next_Auth_Config: NextAuthOptions = {
     ],
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
-        async session({ session }) {
-            return session
+        async jwt({ token, user }) {
+            if (user) {
+                return {
+                    ...token,
+                    id: user.id
+                }
+            }
+            return token
+        },
+        async session({ session, token }) {
+            return {
+                ...session,
+                user: {
+                    ...session.user,
+                    id: token.id
+                }
+            }
         }
     }
 }

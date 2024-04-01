@@ -3,7 +3,6 @@ import ClientProvider from "../lib/ClientProvider";
 import { Next_Auth_Config } from "../lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { toast } from "@/Components/ui/use-toast";
 
 export default async function AdminLayout({
   children,
@@ -14,7 +13,6 @@ export default async function AdminLayout({
   if (session?.user) {
     return (
       <ClientProvider>
-        <Navbar />
         <div>{children}</div>
       </ClientProvider>
     );
