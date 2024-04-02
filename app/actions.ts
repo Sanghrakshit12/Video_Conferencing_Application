@@ -13,7 +13,6 @@ export default async function getToken() {
         throw new Error("Stream API Key or Secret not Set")
     }
     const user = session?.user?.id
-    console.log(user)
     if (!user) {
         throw new Error("ser Not Authenticated")
     }
