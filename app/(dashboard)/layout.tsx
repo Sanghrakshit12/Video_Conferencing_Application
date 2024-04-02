@@ -1,4 +1,3 @@
-import Navbar from "@/Components/navbar";
 import ClientProvider from "../lib/ClientProvider";
 import { Next_Auth_Config } from "../lib/auth";
 import { getServerSession } from "next-auth";

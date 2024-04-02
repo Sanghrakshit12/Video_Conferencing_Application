@@ -43,7 +43,7 @@ export default function CreateMeetingPage() {
   }
   return (
     <div className="flex flex-col items-center space-y-6">
-      <div className="mx-auto w-80 space-y-6 rounded-md bg-slate-100 p-5">
+      <div className="mx-auto w-80 space-y-6 rounded-md bg-purple-200 p-5">
         <h2 className="text-xl font-bold">Create A New Meeting</h2>
         <DescriptionInput value={description} onchange={setDescription} />
         <StartTimeInput value={startTimeInput} onchange={setStartTimeInput} />

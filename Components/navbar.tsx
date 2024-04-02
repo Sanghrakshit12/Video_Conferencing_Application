@@ -8,7 +8,7 @@ export default async function Navbar() {
   const session = await getServerSession(Next_Auth_Config);
 
   return (
-    <div className="fixed top-0 z-10 w-full border-b border-s-zinc-200 bg-zinc-100 py-2">
+    <div className="fixed top-0 z-10 w-full border-b  bg-purple-200 py-2">
       <div className="container flex items-center justify-between">
         <div className="flex items-center">
           <Link href={"/"}>
