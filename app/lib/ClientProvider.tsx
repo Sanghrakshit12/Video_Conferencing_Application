@@ -55,7 +55,7 @@ function useInitializeVideoClient() {
       client.disconnectUser()
       setVideoClient(null)
     }
-  }, [session?.user.id]);
+  }, [session]);
  
   return videoClient;
 }
