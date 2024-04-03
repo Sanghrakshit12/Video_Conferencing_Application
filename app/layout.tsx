@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Components/navbar";
 import Provider from "./lib/provider";
@@ -7,7 +6,6 @@ import { getServerSession } from "next-auth";
 import { Next_Auth_Config } from "./lib/auth";
 import { Toaster } from "@/Components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "NexMeet",
@@ -24,7 +22,7 @@ export default async function RootLayout({
   console.log(session);
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <main className="flex h-screen flex-col items-center justify-center">
           <Provider session={session}>
             <Navbar />

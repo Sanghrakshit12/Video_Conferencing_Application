@@ -1,11 +1,18 @@
 "use client";
 
+import Link from "next/link";
 import { Label } from "@radix-ui/react-label";
-import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import {
+  Call,
+  MemberRequest,
+  useStreamVideoClient,
+} from "@stream-io/video-react-sdk";
 import { Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "../ui/use-toast";
+import { getUserIds } from "@/app/actions";
+import Button from "../Button";
 
 export default function CreateMeetingPage() {
   const { data: session } = useSession();
@@ -22,9 +29,28 @@ export default function CreateMeetingPage() {
     }
     try {
       const id = crypto.randomUUID();
+      // const callType = participantInput ? "Private_Meeting" : "default";
       const call = client.call("default", id);
+      // const memberEmails = participantInput
+      //   .split(",")
+      //   .map((email) => email.trim());
+      // const memberIds = await getUserIds(memberEmails);
+      // if (!Array.isArray(memberIds)) {
+      //   throw new Error("getUserIdsByEmails did not return an array");
+      // }
+      // const members: MemberRequest[] = memberIds
+      //   .map((id) => ({ user_id: id, role: "call_member" }))
+      //   .concat({ user_id: session.user.id, role: "call_member" })
+      //   .filter(
+      //     (v, i, a) => a.findIndex((v2) => v2.user_id === v.user_id) === i,
+      //   );
+
+      // const starts_at = new Date(startTimeInput || Date.now()).toISOString();
+
       await call.getOrCreate({
         data: {
+          // starts_at,
+          // members,
           custom: { description: description },
         },
       });
@@ -51,9 +77,9 @@ export default function CreateMeetingPage() {
           value={participantInput}
           onChange={setparticipantInput}
         />
-        <button className="w-full" onClick={createMeeting}>
+        <Button className="w-full" onClick={createMeeting}>
           Create Meeting
-        </button>
+        </Button>
       </div>
       {call && <MeetingLink call={call} />}
     </div>
@@ -207,5 +233,37 @@ interface MeetinglLink {
 
 function MeetingLink({ call }: MeetinglLink) {
   const meetingLink = `${process.env.NEXTAUTH_URL}/meeting/${call.id}`;
-  return <div className="text-center">{meetingLink}</div>;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(meetingLink);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
+  };
+
+  return (
+    <div className="text-center">
+      <div className="flex items-center gap-3">
+        <span className="flex items-center justify-center gap-2 rounded-full bg-green-400 px-3 py-2 font-semibold text-white">
+          Invitation Link:{" "}
+          <a target="_blank" href={meetingLink} className="font-medium">
+            {meetingLink}
+          </a>
+        </span>
+      </div>
+      <div className="flex items-center justify-center gap-2 mt-4">
+        <button
+          onClick={handleCopy}
+          className={`rounded-full px-3 py-2 font-semibold text-white transition-colors ${
+            copied ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'
+          }`}
+          style={{ fontSize: '0.9rem' }}
+        >
+          {copied ? 'Copied!' : 'Copy Link'}
+        </button>
+      </div>
+    </div>
+  );
 }
+
+
