@@ -40,6 +40,7 @@ export default async function getToken() {
             }
         })
         const userid=users.map(user=>user.id)
+        return userid;
     }
     catch(e){
         console.log("Error in Getting ID's")

@@ -1,38 +1,37 @@
 "use client";
 
-import { Call, CallControls, SpeakerLayout, StreamCall, StreamTheme, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import {
+  Call,
+  CallControls,
+  SpeakerLayout,
+  StreamCall,
+  StreamTheme,
+  useCallStateHooks,
+  useStreamVideoClient,
+} from "@stream-io/video-react-sdk";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import useLoadCall from "../hook/useLoadCall";
 
 interface MeetingPageProps {
   id: string;
 }
 
 export default function MeetingPage({ id }: MeetingPageProps) {
-  const [call, setCall] = useState<Call>();
-  const client = useStreamVideoClient();
-  if (!client) {
-    return  <Loader2 className="mx-auto animate-spin" />;
+  const { call, callLoading } = useLoadCall(id);
+  if (callLoading) {
+    return <Loader2 className="mx-auto animate-spin" />;
   }
   if (!call) {
     return (
-      <button className="flex items-center justify-center gap-2 rounded-full bg-blue-500 px-3 py-2 font-semibold text-white transition-colors hover:bg-blue-600"
-        onClick={async () => {
-          const call = client?.call("default", id);
-          await call?.join();
-          setCall(call);
-        }}
-      >
-     Join Meeting
-      </button>
+    <p className="font-bold text-center ">Call Not Found</p>
     );
   }
   return (
     <StreamCall call={call}>
-    <StreamTheme className="space-y-3">
+      <StreamTheme className="space-y-3">
         <SpeakerLayout />
         <CallControls />
-    </StreamTheme>
+      </StreamTheme>
     </StreamCall>
-  )
+  );
 }
