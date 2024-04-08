@@ -1,7 +1,8 @@
+import Access from "@/Components/access";
 import ClientProvider from "../lib/ClientProvider";
 import { Next_Auth_Config } from "../lib/auth";
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+
 
 export default async function AdminLayout({
   children,
@@ -16,6 +17,6 @@ export default async function AdminLayout({
       </ClientProvider>
     );
   } else {
-    redirect("/")
+    return <Access />
   }
 }

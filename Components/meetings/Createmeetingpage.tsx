@@ -25,7 +25,7 @@ export default function CreateMeetingPage() {
 
   async function createMeeting() {
     if (!session?.user.name || !client) {
-      return;
+     return
     }
     try {
       const id = crypto.randomUUID();
