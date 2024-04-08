@@ -37,9 +37,9 @@ export default function CreateMeetingPage() {
         .split(",")
         .map((email) => email.trim());
       const memberIds = await getUserIds(memberEmails);
-
+    
       const members: MemberRequest[] = memberIds
-        .map((id) => ({ user_id: session.user.id, role: "call_member" }))
+        .map(id => ({ user_id: String(id), role: "call_member" }))
         .concat({ user_id: session.user.id, role: "call_member" })
         .filter(
           (v, i, a) => a.findIndex((v2) => v2.user_id === v.user_id) === i,
@@ -69,7 +69,7 @@ export default function CreateMeetingPage() {
   }
   return (
     <div className="flex flex-col items-center space-y-6">
-      <div className="mx-auto w-80 space-y-6 rounded-md bg-purple-200 p-5">
+      <div className="mx-auto w-80 space-y-6 rounded-md bg-slate-100 p-5">
         <h2 className="text-xl font-bold">Create A New Meeting</h2>
         <DescriptionInput value={description} onchange={setDescription} />
         <StartTimeInput value={startTimeInput} onchange={setStartTimeInput} />

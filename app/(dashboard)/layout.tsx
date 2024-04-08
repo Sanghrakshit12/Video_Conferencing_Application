@@ -2,6 +2,9 @@ import ClientProvider from "../lib/ClientProvider";
 import { Next_Auth_Config } from "../lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import "@stream-io/video-react-sdk/dist/css/styles.css"
+import "../globals.css";
+
 
 export default async function AdminLayout({
   children,
