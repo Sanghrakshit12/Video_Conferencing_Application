@@ -16,7 +16,13 @@ export default function MeetingPage({ id }: MeetingPageProps) {
   }
   if (!call) {
     return (
-      <button className="flex items-center justify-center gap-2 rounded-full bg-blue-500 px-3 py-2 font-semibold text-white transition-colors hover:bg-blue-600"
+      <button style={{
+        position: "absolute",
+        top: "45%",
+        left: "30%",
+        transform: "translate(-50%, -50%)",
+        zIndex: 1
+      }} className="flex  gap-2 rounded-full bg-blue-500 px-3 py-2 font-semibold text-white transition-colors hover:bg-blue-600"
         onClick={async () => {
           const call = client?.call("default", id);
           await call?.join();

@@ -144,8 +144,8 @@ export default function SignUpComponent() {
 
       <p className="mt-2 text-center text-sm text-gray-600">
         If you have an account, please&nbsp;
-        <Link className="text-blue-500 hover:underline" href="/signin">
-          Sign in
+        <Link className="text-blue-800 hover:underline" href="/signin">
+        <b>Sign In</b>
         </Link>
       </p>
     </Form>

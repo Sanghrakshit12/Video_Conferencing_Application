@@ -69,7 +69,7 @@ export default function CreateMeetingPage() {
   }
   return (
     <div className="flex flex-col items-center space-y-6">
-      <div className="mx-auto w-80 space-y-6 rounded-md bg-purple-200 p-5">
+      <div className="mx-auto w-80 space-y-6 rounded-md bg-slate-100 p-5">
         <h2 className="text-xl font-bold">Create A New Meeting</h2>
         <DescriptionInput value={description} onchange={setDescription} />
         <StartTimeInput value={startTimeInput} onchange={setStartTimeInput} />
@@ -244,7 +244,7 @@ function MeetingLink({ call }: MeetinglLink) {
   return (
     <div className="text-center">
       <div className="flex items-center gap-3">
-        <span className="flex items-center justify-center gap-2 rounded-full bg-green-400 px-3 py-2 font-semibold text-white">
+        <span className="flex items-center justify-center gap-2 rounded-full bg-blue-500  hover:bg-blue-600 px-3 py-2 font-semibold text-white">
           Invitation Link:{" "}
           <a target="_blank" href={meetingLink} className="font-medium">
             {meetingLink}
@@ -255,7 +255,7 @@ function MeetingLink({ call }: MeetinglLink) {
         <button
           onClick={handleCopy}
           className={`rounded-full px-3 py-2 font-semibold text-white transition-colors ${
-            copied ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'
+            copied ? 'bg--500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'
           }`}
           style={{ fontSize: '0.9rem' }}
         >
