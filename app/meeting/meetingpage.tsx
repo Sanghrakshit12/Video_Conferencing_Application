@@ -16,6 +16,8 @@ import { useSession } from "next-auth/react";
 import useStreamCall from "../hook/useStreamCall";
 import Link from "next/link";
 import { buttonClassName } from "@/Components/Button";
+import { useState } from "react";
+import SetupUi from "@/Components/meetings/SetupUi";
 
 interface MeetingPageProps {
   id: string;
@@ -51,18 +53,36 @@ export default function MeetingPage({ id }: MeetingPageProps) {
 }
 
 function MeetingScreen() {
+  const call = useStreamCall();
   const { useCallEndedAt, useCallStartsAt } = useCallStateHooks();
+  const [setupComplete, setSetupComplete] = useState(false);
+  async function handlesetupComplete() {}
+
   const callEndedAt = useCallEndedAt();
   const callStartsAt = useCallStartsAt();
   const callsinfuture = callStartsAt && new Date(callStartsAt) > new Date();
   const callhasended = !!callEndedAt;
   if (callhasended) {
-    <UpcomingMeetingScreen />;
+    return <MeetingEndedScreen />;
   }
   if (callsinfuture) {
-    <MeetingEndedScreen />;
+    return <UpcomingMeetingScreen />;
   }
-  return <div>Call Ui</div>;
+  const description = call.state.custom.description;
+  return (
+    <div className="space-y-6">
+      {description && (
+        <p className="text-center">
+          Meeting Description:<span className="font-bold">{description}</span>
+        </p>
+      )}
+      {setupComplete ? (
+        <SpeakerLayout />
+      ) : (
+        <SetupUi onSetupComplete={handlesetupComplete} />
+      )}
+    </div>
+  );
 }
 
 function UpcomingMeetingScreen() {
@@ -72,7 +92,7 @@ function UpcomingMeetingScreen() {
       <p>
         This Meeting Has Not Started yet. it will Start At{" "}
         <span className="font-bold">
-          {call.state.startedAt?.toLocaleString()}
+          {call.state.startsAt?.toLocaleString()}
         </span>
       </p>
       {call.state.custom.description && (

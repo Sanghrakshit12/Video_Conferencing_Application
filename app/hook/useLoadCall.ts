@@ -19,6 +19,6 @@ export default function useLoadCall(id: string) {
             setCallLoading(false)
         }
         loadCall()
-    }), [client, id]
+    }, [client, id])
     return { call, callLoading }
 }
