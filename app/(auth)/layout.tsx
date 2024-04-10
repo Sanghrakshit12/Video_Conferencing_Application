@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { FC } from "react";
+import "../globals.css";
 
 interface Auth_LayoutProps {
   children: ReactNode;

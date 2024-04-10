@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { Label } from "@radix-ui/react-label";
 import {
   Call,
   MemberRequest,
@@ -13,6 +11,10 @@ import { useState } from "react";
 import { toast } from "../ui/use-toast";
 import { getUserIds } from "@/app/actions";
 import Button from "../Button";
+import DescriptionInput from "./DescriptionInput";
+import StartTimeInput from "./StartTimeInput";
+import ParticipantInput from "./ParticipantInput";
+import MeetingLink from "./MeetingLink";
 
 export default function CreateMeetingPage() {
   const { data: session } = useSession();
@@ -29,28 +31,26 @@ export default function CreateMeetingPage() {
     }
     try {
       const id = crypto.randomUUID();
-      // const callType = participantInput ? "Private_Meeting" : "default";
-      const call = client.call("default", id);
-      // const memberEmails = participantInput
-      //   .split(",")
-      //   .map((email) => email.trim());
-      // const memberIds = await getUserIds(memberEmails);
-      // if (!Array.isArray(memberIds)) {
-      //   throw new Error("getUserIdsByEmails did not return an array");
-      // }
-      // const members: MemberRequest[] = memberIds
-      //   .map((id) => ({ user_id: id, role: "call_member" }))
-      //   .concat({ user_id: session.user.id, role: "call_member" })
-      //   .filter(
-      //     (v, i, a) => a.findIndex((v2) => v2.user_id === v.user_id) === i,
-      //   );
+      const callType = participantInput ? "Private_Meeting" : "default";
+      const call = client.call(callType, id);
+      const memberEmails = participantInput
+        .split(",")
+        .map((email) => email.trim());
+      const memberIds = await getUserIds(memberEmails);
+    
+      const members: MemberRequest[] = memberIds
+        .map(id => ({ user_id: String(id), role: "call_member" }))
+        .concat({ user_id: session.user.id, role: "call_member" })
+        .filter(
+          (v, i, a) => a.findIndex((v2) => v2.user_id === v.user_id) === i,
+        );
 
-      // const starts_at = new Date(startTimeInput || Date.now()).toISOString();
+      const starts_at = new Date(startTimeInput || Date.now()).toISOString();
 
       await call.getOrCreate({
         data: {
-          // starts_at,
-          // members,
+          starts_at,
+          members,
           custom: { description: description },
         },
       });
@@ -85,185 +85,3 @@ export default function CreateMeetingPage() {
     </div>
   );
 }
-interface DescriptionInputProps {
-  value: string;
-  onchange: (value: string) => void;
-}
-
-function DescriptionInput({ value, onchange }: DescriptionInputProps) {
-  const [active, setActive] = useState(false);
-  return (
-    <div className="space-y-2">
-      <div className="font-medium">Meeting Info</div>
-      <label>
-        <input
-          type="checkbox"
-          checked={active}
-          onChange={(e) => {
-            setActive(e.target.checked);
-            onchange("");
-          }}
-        />
-        Add Description
-      </label>
-      {active && (
-        <Label className="block space-y-1">
-          <span className="font-medium">Description</span>
-          <textarea
-            value={value}
-            onChange={(e) => {
-              onchange(e.target.value);
-            }}
-            maxLength={500}
-            className="w-full rounded-md border border-gray-300 p-2"
-          />
-        </Label>
-      )}
-    </div>
-  );
-}
-
-interface StartTimeInputProps {
-  value: string;
-  onchange: (value: string) => void;
-}
-
-function StartTimeInput({ value, onchange }: StartTimeInputProps) {
-  const [active, setActive] = useState(false);
-  const datetimelocalNow = new Date(
-    new Date().getTime() - new Date().getTimezoneOffset() * 60000,
-  )
-    .toISOString()
-    .slice(0, 16);
-  return (
-    <div className="space-y-2">
-      <div className="font-medium">Meeting Start:</div>
-      <label className="flex items-center gap-1.5">
-        <input
-          type="radio"
-          checked={!active}
-          onChange={() => {
-            setActive(false);
-            onchange("");
-          }}
-        />
-        Start Meeting Immediately
-      </label>
-      <label className="flex items-center gap-1.5">
-        <input
-          type="radio"
-          checked={active}
-          onChange={() => {
-            setActive(true);
-            onchange(datetimelocalNow);
-          }}
-        />
-        Start Meeting At date/time
-      </label>
-      {active && (
-        <Label className="block space-y-1">
-          <span className="font-medium">Start Time</span>
-          <input
-            type="datetime-local"
-            value={value}
-            onChange={(e) => {
-              onchange(e.target.value);
-            }}
-            min={datetimelocalNow}
-            className="w-full rounded-md border border-gray-300 p-2"
-          />
-        </Label>
-      )}
-    </div>
-  );
-}
-
-interface ParticipantInputProps {
-  value: string;
-  onChange: (value: string) => void;
-}
-
-function ParticipantInput({ value, onChange }: ParticipantInputProps) {
-  const [active, setActive] = useState(false);
-
-  return (
-    <div className="space-y-2">
-      <div className="font-medium">Participants:</div>
-      <label className="flex items-center gap-1.5">
-        <input
-          type="radio"
-          checked={!active}
-          onChange={() => {
-            setActive(false);
-            onChange("");
-          }}
-        />
-        Everyone with Link Can Join
-      </label>
-      <label className="flex items-center gap-1.5">
-        <input
-          type="radio"
-          checked={active}
-          onChange={() => {
-            setActive(true);
-          }}
-        />
-        Private Meetings
-      </label>
-      {active && (
-        <Label className="block space-y-1">
-          <span className="font-medium">Participants Email</span>
-          <textarea
-            value={value}
-            onChange={(e) => {
-              onChange(e.target.value);
-            }}
-            placeholder="Enter Participants Email Address Seprated by Commas"
-            className="w-full rounded-md border border-gray-300 p-2"
-          />
-        </Label>
-      )}
-    </div>
-  );
-}
-
-interface MeetinglLink {
-  call: Call;
-}
-
-function MeetingLink({ call }: MeetinglLink) {
-  const meetingLink = `${process.env.NEXTAUTH_URL}/meeting/${call.id}`;
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(meetingLink);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
-  };
-
-  return (
-    <div className="text-center">
-      <div className="flex items-center gap-3">
-        <span className="flex items-center justify-center gap-2 rounded-full bg-blue-500  hover:bg-blue-600 px-3 py-2 font-semibold text-white">
-          Invitation Link:{" "}
-          <a target="_blank" href={meetingLink} className="font-medium">
-            {meetingLink}
-          </a>
-        </span>
-      </div>
-      <div className="flex items-center justify-center gap-2 mt-4">
-        <button
-          onClick={handleCopy}
-          className={`rounded-full px-3 py-2 font-semibold text-white transition-colors ${
-            copied ? 'bg--500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'
-          }`}
-          style={{ fontSize: '0.9rem' }}
-        >
-          {copied ? 'Copied!' : 'Copy Link'}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-
