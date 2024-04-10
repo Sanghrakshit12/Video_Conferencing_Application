@@ -56,7 +56,10 @@ function MeetingScreen() {
   const call = useStreamCall();
   const { useCallEndedAt, useCallStartsAt } = useCallStateHooks();
   const [setupComplete, setSetupComplete] = useState(false);
-  async function handlesetupComplete() {}
+  async function handlesetupComplete() {
+    call.join()
+    setSetupComplete(true)
+  }
 
   const callEndedAt = useCallEndedAt();
   const callStartsAt = useCallStartsAt();
