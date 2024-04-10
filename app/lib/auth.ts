@@ -27,7 +27,7 @@ export const Next_Auth_Config: NextAuthOptions = {
                     placeholder: "password"
                 },
             },
-            async authorize(credentials):Promise<any> {
+            async authorize(credentials): Promise<any> {
                 try {
                     if (!credentials?.username || !credentials?.password) {
                         return null;

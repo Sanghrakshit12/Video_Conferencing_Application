@@ -7,7 +7,7 @@ import {
 import PermissionPrompt from "./PermissionPrompt";
 import { useEffect, useState } from "react";
 import Button from "../Button";
-import {AudioVolumeIndicator} from "./AudioVolumeIndicator";
+import { AudioVolumeIndicator } from "./AudioVolumeIndicator";
 
 interface SetupUiProps {
   onSetupComplete: () => void;

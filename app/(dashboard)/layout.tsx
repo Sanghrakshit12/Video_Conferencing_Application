@@ -3,7 +3,6 @@ import ClientProvider from "../lib/ClientProvider";
 import { Next_Auth_Config } from "../lib/auth";
 import { getServerSession } from "next-auth";
 
-
 export default async function AdminLayout({
   children,
 }: Readonly<{
@@ -12,11 +11,13 @@ export default async function AdminLayout({
   const session = await getServerSession(Next_Auth_Config);
   if (session?.user) {
     return (
-      <ClientProvider>
-        <div>{children}</div>
-      </ClientProvider>
+      <div>
+        <ClientProvider>
+          <div>{children}</div>
+        </ClientProvider>
+      </div>
     );
   } else {
-    return <Access />
+    return <Access />;
   }
 }

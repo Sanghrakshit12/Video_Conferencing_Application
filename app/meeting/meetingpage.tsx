@@ -1,14 +1,10 @@
 "use client";
 
 import {
-  Call,
-  CallControls,
   SpeakerLayout,
   StreamCall,
   StreamTheme,
-  useCall,
   useCallStateHooks,
-  useStreamVideoClient,
 } from "@stream-io/video-react-sdk";
 import { Loader2 } from "lucide-react";
 import useLoadCall from "../hook/useLoadCall";
@@ -38,21 +34,9 @@ export default function MeetingPage({ id }: MeetingPageProps) {
       !call.state.members.find((m) => m.user.id === session?.user.id));
   if (notALlowed) {
     return (
-      <button style={{
-        position: "absolute",
-        top: "45%",
-        left: "30%",
-        transform: "translate(-50%, -50%)",
-        zIndex: 1
-      }} className="flex  gap-2 rounded-full bg-blue-500 px-3 py-2 font-semibold text-white transition-colors hover:bg-blue-600"
-        onClick={async () => {
-          const call = client?.call("default", id);
-          await call?.join();
-          setCall(call);
-        }}
-      >
-     Join Meeting
-      </button>
+      <p className="text-center font-bold">
+        You Are Not Allowed To Join THis Meeting
+      </p>
     );
   }
   return (

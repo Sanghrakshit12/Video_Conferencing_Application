@@ -14,7 +14,7 @@ export default function MeetingLink({ call }: MeetinglLink) {
   const handleCopy = () => {
     navigator.clipboard.writeText(meetingLink);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
+    setTimeout(() => setCopied(false), 2000); 
   };
 
   return (
@@ -45,8 +45,12 @@ export default function MeetingLink({ call }: MeetinglLink) {
           meetingLink,
           call.state.startedAt,
           call.state.custom.description,
-        )} target="_blank" className="text-blue-500 hover:underline"
-      >Send Email Invitation</a>
+        )}
+        target="_blank"
+        className="text-blue-500 hover:underline"
+      >
+        Send Email Invitation
+      </a>
     </div>
   );
 }

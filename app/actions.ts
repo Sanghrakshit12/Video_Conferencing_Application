@@ -23,26 +23,26 @@ export default async function getToken() {
     const issuedAt = Math.floor(Date.now() / 1000) - 60;
 
     const token = streamClient.createToken(session.user.id, expireationTime, issuedAt)
-    console.log("Successfully created Token",token)
+    console.log("Successfully created Token", token)
     return token
 }
 
- export async function getUserIds(emailadresses:string[]){
-    try{
-        const users=await db.user.findMany({
-            where:{
-                username:{
-                    in:emailadresses
+export async function getUserIds(emailadresses: string[]) {
+    try {
+        const users = await db.user.findMany({
+            where: {
+                username: {
+                    in: emailadresses
                 }
             },
-            select:{
-                id:true
+            select: {
+                id: true
             }
         })
-        const userid=users.map(user=>user.id)
+        const userid = users.map(user => user.id)
         return userid;
     }
-    catch(e){
+    catch (e) {
         console.log("Error in Getting ID's")
         throw new Error()
     }

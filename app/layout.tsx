@@ -6,7 +6,6 @@ import { getServerSession } from "next-auth";
 import { Next_Auth_Config } from "./lib/auth";
 import { Toaster } from "@/Components/ui/toaster";
 
-
 export const metadata: Metadata = {
   title: "NexMeet",
   description:

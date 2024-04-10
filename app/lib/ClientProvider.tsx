@@ -31,8 +31,8 @@ function useInitializeVideoClient() {
   );
   useEffect(() => {
     if (!session) {
-      setVideoClient(null); 
-      return () => {}; 
+      setVideoClient(null);
+      return () => {};
     }
     console.log("from client", session);
     const streamUser: User = {
@@ -50,12 +50,11 @@ function useInitializeVideoClient() {
       tokenProvider: getToken,
     });
     setVideoClient(client);
-    return ()=>{
-  
-      client.disconnectUser()
-      setVideoClient(null)
-    }
+    return () => {
+      client.disconnectUser();
+      setVideoClient(null);
+    };
   }, [session]);
- 
+
   return videoClient;
 }

@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-.str-video__participant-details{
+.str-video__participant-details {
   color: white;
 }
 
-.str-video__menu-container{
+.str-video__menu-container {
   color: white;
 }
-.str-video__notification{
+.str-video__notification {
   color: white;
 }
 
@@ -83,12 +83,11 @@
   }
   body {
     @apply bg-background text-foreground;
-      }
+  }
 }
 
 .background-image {
-  background-image: url('/bg3.avif');
+  background-image: url("/bg3.avif");
   background-size: cover;
   background-position: center;
 }
-

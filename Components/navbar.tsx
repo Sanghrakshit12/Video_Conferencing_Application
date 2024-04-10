@@ -10,13 +10,11 @@ export default async function Navbar() {
   const session = await getServerSession(Next_Auth_Config);
 
   return (
-    
     <div className="fixed top-0 z-10 w-full border-b  bg-blue-600 py-2">
-        
       <div className="container flex items-center justify-between">
         <div className="flex items-center">
           <Link href={"/"}>
-          <Image src={bg} alt="Icon" width={45} height={3} />
+            <Image src={bg} alt="Icon" width={45} height={3} />
           </Link>
         </div>
         <div className="flex items-end">

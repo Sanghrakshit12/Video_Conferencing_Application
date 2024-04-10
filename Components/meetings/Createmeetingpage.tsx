@@ -27,7 +27,7 @@ export default function CreateMeetingPage() {
 
   async function createMeeting() {
     if (!session?.user.name || !client) {
-     return
+      return;
     }
     try {
       const id = crypto.randomUUID();
@@ -37,9 +37,9 @@ export default function CreateMeetingPage() {
         .split(",")
         .map((email) => email.trim());
       const memberIds = await getUserIds(memberEmails);
-    
+
       const members: MemberRequest[] = memberIds
-        .map(id => ({ user_id: String(id), role: "call_member" }))
+        .map((id) => ({ user_id: String(id), role: "call_member" }))
         .concat({ user_id: session.user.id, role: "call_member" })
         .filter(
           (v, i, a) => a.findIndex((v2) => v2.user_id === v.user_id) === i,
