@@ -14,6 +14,7 @@ import Link from "next/link";
 import { buttonClassName } from "@/Components/Button";
 import { useState } from "react";
 import SetupUi from "@/Components/meetings/SetupUi";
+import CallUi from "@/Components/meetings/CallUi";
 
 interface MeetingPageProps {
   id: string;
@@ -76,7 +77,7 @@ function MeetingScreen() {
         </p>
       )}
       {setupComplete ? (
-        <SpeakerLayout />
+        <CallUi/>
       ) : (
         <SetupUi onSetupComplete={handlesetupComplete} />
       )}
