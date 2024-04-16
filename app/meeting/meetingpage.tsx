@@ -41,11 +41,15 @@ export default function MeetingPage({ id }: MeetingPageProps) {
     );
   }
   return (
-    <StreamCall call={call}>
+    <div style={{display:"flex"}}> 
+   <StreamCall call={call}>
       <StreamTheme>
         <MeetingScreen />
       </StreamTheme>
-    </StreamCall>
+    </StreamCall>  
+    <div style={{width:"50px",height:"50px",backgroundColor:"red",marginTop:"40px"}}>hello</div>
+    </div>
+     
   );
 }
 

@@ -1,6 +1,12 @@
 import MeetingButton from "@/Components/meetings/meetingbutton";
+import MessageList from "@/Components/meetings/messageList";
 
 export default function Home() {
+  const messages = [
+    { message: "Hello!", date: "2024-04-16" },
+    { message: "How are you?", date: "2024-04-16" },
+  ];
+  
   return (
     <div>
       <div
@@ -34,7 +40,11 @@ export default function Home() {
         }}
       >
         <MeetingButton />
+        {messages.map((message) => (
+      <MessageList key={message.date} message={message.message} date={message.date} />
+    ))}
       </div>
+   
     </div>
   );
 }
