@@ -50,7 +50,7 @@ export default function SignUpComponent() {
   });
   async function onSubmit(values: z.infer<typeof FormSchema>) {
     try {
-      const headers = { "Content-type": "application-json" };
+      const headers = { "Content-type": "application/json" };
       const resposnse = await axios.post(
         "https://video-conferencing-application-phi.vercel.app/api/user",
         {
