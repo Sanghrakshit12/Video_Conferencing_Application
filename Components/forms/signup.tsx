@@ -52,7 +52,7 @@ export default function SignUpComponent() {
     try {
       const headers = { "Content-type": "application-json" };
       const resposnse = await axios.post(
-        "http://localhost:3000/api/user",
+        "https://video-conferencing-application-phi.vercel.app/api/user",
         {
           Name: values.Name,
           username: values.username,
