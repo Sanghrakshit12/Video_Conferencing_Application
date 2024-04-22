@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import prisma from "@/db";
-import { hash } from "bcrypt";
+// import { hash } from "bcrypt";
 import * as z from 'zod';
 
 interface BodyType {
@@ -34,13 +34,13 @@ export async function POST(req: NextRequest) {
             return Response.json({ error: "User already exists" }, { status: 400 });
         }
 
-        const hashedPassword = await hash(password, 10);
+        // const hashedPassword = await hash(password, 10);
 
         const newUser = await prisma.user.create({
             data: {
                 Name,
                 username,
-                password:hashedPassword
+                password
             }
         });
 
