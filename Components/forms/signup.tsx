@@ -66,6 +66,7 @@ export default function SignUpComponent() {
       });
       router.push("/signin");
     } catch (err) {
+      console.log(err)
       toast({
         title: "Oops! Something Went Wrong",
         description: "Error Signing Up",
