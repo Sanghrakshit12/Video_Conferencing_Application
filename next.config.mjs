@@ -4,6 +4,14 @@ const nextConfig = {
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/user',
+        destination: 'http://localhost:3000/api/user'
+      }
+    ]
+  }
 };
 
-export default nextConfig;
+module.exports = nextConfig;
