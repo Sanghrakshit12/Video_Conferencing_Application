@@ -24,7 +24,7 @@ export default async function RootLayout({
       <body className="bg-slate-200">
         <main className=" flex h-screen flex-col items-center justify-center ">
           <Provider session={session}>
-            <div>{children}</div>
+            <div className="" >{children}</div>
           </Provider>
           <Toaster />
         </main>

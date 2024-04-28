@@ -91,3 +91,8 @@
   background-size: cover;
   background-position: center;
 }
+
+
+.testing{
+  border:  2px solid red;
+}

@@ -12,8 +12,9 @@ export default async function Navbar() {
     <div className="fixed top-0 left-0 right-0 z-10 border-b bg-blue-600 py-2">
       <div className="container flex items-center justify-between mx-auto">
         <div className="flex items-center">
-          <Link href={"/"}>
+          <Link href={"/"} className="flex text-2xl text-white font-bold items-center gap-x-2" >
             <Image src={bg} alt="Icon" width={45} height={3} />
+            <h1>NexMeet</h1>
           </Link>
         </div>
         <div className="flex items-end">
