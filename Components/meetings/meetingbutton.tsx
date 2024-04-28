@@ -1,7 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { HTMLProps } from "react";
 
-export default function MeetingButton({classes}) {
+interface TextProps {
+  classes: HTMLProps<HTMLElement>["className"];
+}
+
+export default function MeetingButton({classes}:TextProps) {
   const router = useRouter();
 
   const handleClick = () => {
