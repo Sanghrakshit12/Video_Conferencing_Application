@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import AuthButtons from "./forms/authbutton";
-import { Next_Auth_Config } from "@/app/lib/auth";
+import { Next_Auth_Config } from "../lib/auth";
 import { getServerSession } from "next-auth";
-import bg from "../public/nav-icon.png";
+import bg from "../../public/nav-icon.png"
 
 export default async function Navbar() {
   const session = await getServerSession(Next_Auth_Config);

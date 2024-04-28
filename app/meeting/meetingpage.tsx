@@ -10,10 +10,10 @@ import useLoadCall from "../hook/useLoadCall";
 import { useSession } from "next-auth/react";
 import useStreamCall from "../hook/useStreamCall";
 import Link from "next/link";
-import { buttonClassName } from "@/Components/Button";
+import { buttonClassName } from "../Components/Button";
 import { useState } from "react";
-import SetupUi from "@/Components/meetings/SetupUi";
-import CallUi from "@/Components/meetings/CallUi";
+import SetupUi from "../Components/meetings/SetupUi";
+import CallUi from "../Components/meetings/CallUi";
 
 interface MeetingPageProps {
   id: string;

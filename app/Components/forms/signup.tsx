@@ -52,7 +52,7 @@ export default function SignUpComponent() {
     try {
       const headers = { "Content-type": "application/json" };
       const resposnse = await axios.post(
-        "http://localhost:3000/api/user",
+        "api/user",
         {
           Name: values.Name,
           username: values.username,
@@ -66,7 +66,7 @@ export default function SignUpComponent() {
       });
       router.push("/signin");
     } catch (err) {
-      console.log(err)
+      console.log(err);
       toast({
         title: "Oops! Something Went Wrong",
         description: "Error Signing Up",

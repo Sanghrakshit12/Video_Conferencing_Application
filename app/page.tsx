@@ -1,5 +1,5 @@
-import MeetingButton from "@/Components/meetings/meetingbutton";
-import Navbar from "@/Components/navbar";
+import MeetingButton from "./Components/meetings/meetingbutton";
+import Navbar from "./Components/navbar";
 import onlineMeeting from "../public/online-meeting.png";
 import Image from "next/image";
 export default function Home() {
@@ -21,15 +21,7 @@ export default function Home() {
               interactions
             </p>
           </div>
-          <div className="flex justify-end py-3"
-          // style={{
-          //   // position: "absolute",
-          //   // top: "45%",
-          //   // left: "30%",
-          //   // transform: "translate(-50%, -50%)",
-          //   // zIndex: 1,
-          // }}
-          >
+          <div className="flex justify-end py-3">
             <MeetingButton classes={'text-xl px-8 py-4 hover:scale-105 transition-all'} />
           </div>
         </div>

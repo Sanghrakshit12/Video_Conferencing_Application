@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { FC } from "react";
 import "../globals.css";
-import Navbar from "@/Components/navbar";
+import Navbar from "../Components/navbar";
 
 interface Auth_LayoutProps {
   children: ReactNode;
