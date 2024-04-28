@@ -1,8 +1,10 @@
 import MeetingButton from "@/Components/meetings/meetingbutton";
+import Navbar from "@/Components/navbar";
 
 export default function Home() {
   return (
-    <div>
+    <div >
+      <Navbar />
       <div
         style={{
           position: "absolute",

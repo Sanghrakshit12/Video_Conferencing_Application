@@ -1,7 +1,6 @@
 "use client";
 
 import { Label } from "@radix-ui/react-label";
-import { Call } from "@stream-io/video-react-sdk";
 import { useState } from "react";
 
 interface ParticipantInputProps {

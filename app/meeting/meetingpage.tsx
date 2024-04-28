@@ -15,6 +15,7 @@ import { buttonClassName } from "@/Components/Button";
 import { useState } from "react";
 import SetupUi from "@/Components/meetings/SetupUi";
 import CallUi from "@/Components/meetings/CallUi";
+import PermissionPrompt from "@/Components/meetings/PermissionPrompt";
 
 interface MeetingPageProps {
   id: string;
@@ -35,9 +36,13 @@ export default function MeetingPage({ id }: MeetingPageProps) {
       !call.state.members.find((m) => m.user.id === session?.user.id));
   if (notALlowed) {
     return (
-      <p className="text-center font-bold">
-        You Are Not Allowed To Join THis Meeting
-      </p>
+      <div className="flex h-screen items-center justify-center">
+        <div className="rounded-lg bg-white p-8 shadow-md">
+          <p className="text-center font-bold">
+            You Are Not Allowed To Join This Meeting
+          </p>
+        </div>
+      </div>
     );
   }
   return (
@@ -54,8 +59,8 @@ function MeetingScreen() {
   const { useCallEndedAt, useCallStartsAt } = useCallStateHooks();
   const [setupComplete, setSetupComplete] = useState(false);
   async function handlesetupComplete() {
-    call.join()
-    setSetupComplete(true)
+    call.join();
+    setSetupComplete(true);
   }
 
   const callEndedAt = useCallEndedAt();
@@ -70,14 +75,19 @@ function MeetingScreen() {
   }
   const description = call.state.custom.description;
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {description && (
-        <p className="text-center">
-          Meeting Description:<span className="font-bold">{description}</span>
-        </p>
+        <div className="flex items-center justify-center">
+          <div className="max-w-lg rounded-lg bg-white p-8 shadow-md">
+            <p className="text-center">
+              Meeting Description:
+              <span className="font-bold text-red-600">{description}</span>
+            </p>
+          </div>
+        </div>
       )}
       {setupComplete ? (
-        <CallUi/>
+        <CallUi />
       ) : (
         <SetupUi onSetupComplete={handlesetupComplete} />
       )}
@@ -88,51 +98,41 @@ function MeetingScreen() {
 function UpcomingMeetingScreen() {
   const call = useStreamCall();
   return (
-    <div className="flex flex-col items-center gap-6">
-      <p>
-        This Meeting Has Not Started yet. it will Start At{" "}
-        <span className="font-bold">
-          {call.state.startsAt?.toLocaleString()}
-        </span>
-      </p>
-      {call.state.custom.description && (
-        <p>
-          Description:{" "}
-          <span className="font-bold">{call.state.custom.description}</span>
-          <Link href="/" className={buttonClassName}>
-            Go Home
-          </Link>
-        </p>
-      )}
+    <div className="flex h-screen items-center justify-center">
+      <div className="rounded-lg bg-white p-8 shadow-md">
+        <div className="flex flex-col items-center gap-6">
+          <p>
+            This Meeting Has Not Started yet. it will Start At{" "}
+            <span className="font-bold">
+              {call.state.startsAt?.toLocaleString()}
+            </span>
+          </p>
+          {call.state.custom.description && (
+            <p>
+              Description:{" "}
+              <span className="font-bold">{call.state.custom.description}</span>
+              <Link href="/" className={buttonClassName}>
+                Go Home
+              </Link>
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
 
 function MeetingEndedScreen() {
   return (
-    <div className="flex flex-col items-center gap-6">
-      <p className="font-bold">The Meeting Has Ended</p>
-      <Link href="/" className={buttonClassName}>
-        Go Home
-      </Link>
+    <div className="flex h-screen items-center justify-center">
+      <div className="rounded-lg bg-white p-8 shadow-md">
+        <div className="flex flex-col items-center gap-6">
+          <p className="font-bold">The Meeting Has Ended</p>
+          <Link href="/" className={buttonClassName}>
+            Go Home
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
-
-// return (
-//   <button style={{
-//     position: "absolute",
-//     top: "45%",
-//     left: "30%",
-//     transform: "translate(-50%, -50%)",
-//     zIndex: 1
-//   }} className="flex  gap-2 rounded-full bg-blue-500 px-3 py-2 font-semibold text-white transition-colors hover:bg-blue-600"
-//     onClick={async () => {
-//       const call = client?.call("Private_Meeting", id);
-//       await call?.join();
-//       setCall(call);
-//     }}
-//   >
-//  Join Meeting
-//   </button>
-// );

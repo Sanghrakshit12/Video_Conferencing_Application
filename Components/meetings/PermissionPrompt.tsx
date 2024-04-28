@@ -7,7 +7,7 @@ export default function PermissionPrompt() {
         <Webcam />
         <Mic />
       </div>
-      <p className="text-center">
+      <p className="text-center text-black">
         Please Allow Access to your Microphone and Camera to Join The Call
       </p>
     </div>

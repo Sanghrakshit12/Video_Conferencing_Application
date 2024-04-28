@@ -7,8 +7,6 @@ import {
 import PermissionPrompt from "./PermissionPrompt";
 import { useEffect, useState } from "react";
 import Button from "../Button";
-import { AudioVolumeIndicator } from "./AudioVolumeIndicator";
-
 interface SetupUiProps {
   onSetupComplete: () => void;
 }
@@ -37,17 +35,21 @@ export default function SetupUi({ onSetupComplete }: SetupUiProps) {
       <h1 className="text-center text-2xl font-bold ">Setup</h1>
       <VideoPreview />
       <div className="h-16 flex-1 items-center gap-3">
-        <AudioVolumeIndicator />
         <DeviceSettings />
       </div>
-      <label className="flex items-center gap-2 font-medium">
+      <label className="flex items-center gap-2 font-serif font-semibold text-black">
         <input
           type="checkbox"
           checked={MicCamDisabled}
           onChange={(e) => setMicCamDiabled(e.target.checked)}
         />
         Join with Mic and Camera Off
-        <Button onClick={onSetupComplete}>Join Meeting</Button>
+        <Button
+          className=" font-serif font-semibold text-white"
+          onClick={onSetupComplete}
+        >
+          Join Meeting
+        </Button>
       </label>
     </div>
   );

@@ -21,10 +21,9 @@ export default async function RootLayout({
   console.log(session);
   return (
     <html lang="en">
-      <body className="background-image">
-        <main className="flex h-screen flex-col items-center justify-center">
+      <body className="bg-slate-200">
+        <main className=" flex h-screen flex-col items-center justify-center ">
           <Provider session={session}>
-            <Navbar />
             <div>{children}</div>
           </Provider>
           <Toaster />
