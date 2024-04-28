@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import { useSearchParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
@@ -7,7 +8,20 @@ function Modal() {
   const searchParams = useSearchParams();
   const modal = searchParams.get("modal");
   const pathname = usePathname();
-  const [question,setQuestion]=useState("")
+  const [question, setQuestion] = useState("");
+  const [options, setOptions] = useState(["", ""]);
+
+  interface OptionProps {
+    index: number;
+    value: string;
+  }
+
+  function handleOptionChange({ index, value }: OptionProps) {
+    const newOptions = [...options];
+    newOptions[index] = value;
+    setOptions(newOptions);
+  }
+
   return (
     <>
       {modal && (
@@ -17,14 +31,28 @@ function Modal() {
               <p>Admin Prompt</p>
               <div className="w-full">
                 <input
-                  onChange={(e)=>{
-                    setQuestion(e.target.value)
+                  onChange={(e) => {
+                    setQuestion(e.target.value);
                   }}
                   type="text"
                   placeholder="Enter Your Question"
                   className="w-full rounded-md border border-gray-300 bg-white px-4 py-2 focus:border-blue-500 focus:outline-none"
                 />
                 {question && <p>{question}</p>}
+                <br />
+                <p>Options:</p>
+                {options.map((option, index) => (
+                  <input
+                    key={index}
+                    type="text"
+                    value={option}
+                    onChange={(e) =>
+                      handleOptionChange({ index, value: e.target.value })
+                    }
+                    placeholder={`Option ${index + 1}`}
+                    className="w-full rounded-md border border-gray-300 bg-white px-4 py-2 focus:border-blue-500 focus:outline-none"
+                  />
+                ))}
               </div>
               <br />
               <Link href={pathname}>
