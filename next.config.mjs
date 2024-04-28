@@ -8,10 +8,10 @@ const nextConfig = {
     return [
       {
         source: '/api/user',
-        destination: 'http://localhost:3000/api/user'
+        destination: 'http://localhost:3000/api/user*'
       }
     ]
   }
 };
 
-module.exports = nextConfig;
+export default nextConfig;
