@@ -1,14 +1,33 @@
-import { buttonClassName } from "@/Components/Button";
-import { cn } from "@/lib/utils";
-import Link from "next/link"
+import { buttonVariants } from "@/Components/ui/button";
+import Link from "next/link";
+
 interface PageProps {
   params: { id: string };
 }
 
-export default function Page({ params: { id } }:PageProps) {
-    return <div className="flex flex-col items-center gap-3">
-        <p className=" font-bold">You Left the Meeting</p>
-            <Link href={`/meeting/${id}`} className={cn(buttonClassName,"bg-gray-500 hover:bg-gray-600")}>Rejoin</Link>
-
-    </div>
+export default function Page({ params: { id } }: PageProps) {
+  return (
+    <>
+      <div className="flex items-center justify-center">
+        <div className="max-w-lg rounded-lg bg-white p-8 shadow-md">
+          <p className="text-center">
+            You Left the Meeting
+            <span className="font-bold text-red-600"> - NexMeet</span>
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center justify-center gap-3 pt-5">
+        <Link href={"/"} passHref>
+          <button className={buttonVariants({ variant: "destructive" })}>
+            Home
+          </button>
+        </Link>
+        <Link href={`/meeting/${id}`} passHref>
+          <button className={buttonVariants({ variant: "destructive" })}>
+            Rejoin Meeting
+          </button>
+        </Link>
+      </div>
+    </>
+  );
 }

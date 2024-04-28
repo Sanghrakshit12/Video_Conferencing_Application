@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  SpeakerLayout,
   StreamCall,
   StreamTheme,
   useCallStateHooks,
@@ -15,7 +14,6 @@ import { buttonClassName } from "@/Components/Button";
 import { useState } from "react";
 import SetupUi from "@/Components/meetings/SetupUi";
 import CallUi from "@/Components/meetings/CallUi";
-import PermissionPrompt from "@/Components/meetings/PermissionPrompt";
 
 interface MeetingPageProps {
   id: string;
@@ -36,13 +34,14 @@ export default function MeetingPage({ id }: MeetingPageProps) {
       !call.state.members.find((m) => m.user.id === session?.user.id));
   if (notALlowed) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="rounded-lg bg-white p-8 shadow-md">
-          <p className="text-center font-bold">
-            You Are Not Allowed To Join This Meeting
-          </p>
-        </div>
+      <div className="flex items-center justify-center">
+      <div className="max-w-lg rounded-lg bg-white p-8 shadow-md">
+        <p className="text-center">
+        You Are Not Allowed To Join This Meeting
+          <span className="font-bold text-red-600"> - NexMeet</span>
+        </p>
       </div>
+    </div>
     );
   }
   return (
@@ -123,6 +122,9 @@ function UpcomingMeetingScreen() {
 }
 
 function MeetingEndedScreen() {
+  const call = useStreamCall();
+  call.camera.disable();
+  call.microphone.disable();
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="rounded-lg bg-white p-8 shadow-md">

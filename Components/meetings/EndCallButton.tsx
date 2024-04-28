@@ -10,5 +10,9 @@ const channelOwner=localParticipant && call.state.createdBy && localParticipant.
 if(!channelOwner){
 return null
 }
-return <button className="mx-auto block font-medium text-red-500 hover:underline" onClick={call.endCall}>End Call For Everyone</button>
+return <button className="mx-auto block font-medium text-red-500 hover:underline" onClick={()=>{
+    call.endCall
+    call.camera.disable()
+    call.microphone.disable()
+}}>End Call For Everyone</button>
 }
