@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from './modal';
+import Modal from '@/Components/modal/modal';
 import styles from './styles.module.css'; 
 
 const HostComponent: React.FC = () => {
