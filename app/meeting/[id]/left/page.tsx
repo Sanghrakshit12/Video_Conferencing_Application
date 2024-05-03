@@ -12,7 +12,7 @@ export default function Page({ params: { id } }: PageProps) {
         <div className="max-w-lg rounded-lg bg-white p-8 shadow-md">
           <p className="text-center">
             You Left the Meeting
-            <span className="font-bold text-red-600"> - NexMeet</span>
+            <span className="font-bold text-pink-600"> - NexMeet</span>
           </p>
         </div>
       </div>

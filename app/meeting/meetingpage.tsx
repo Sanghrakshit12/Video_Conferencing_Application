@@ -14,6 +14,7 @@ import { buttonClassName } from "@/Components/Button";
 import { useState } from "react";
 import SetupUi from "@/Components/meetings/SetupUi";
 import CallUi from "@/Components/meetings/CallUi";
+import Trial from "@/Components/trial/inputs";
 
 interface MeetingPageProps {
   id: string;
@@ -44,8 +45,11 @@ export default function MeetingPage({ id }: MeetingPageProps) {
     </div>
     );
   }
+  
   return (
+    
     <StreamCall call={call}>
+      <Trial />
       <StreamTheme>
         <MeetingScreen />
       </StreamTheme>

@@ -5,6 +5,7 @@ import Provider from "./lib/provider";
 import { getServerSession } from "next-auth";
 import { Next_Auth_Config } from "./lib/auth";
 import { Toaster } from "@/Components/ui/toaster";
+import Trial from "@/Components/trial/inputs";
 import ModalLayout from "../Components/modal/modallayout";
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default async function RootLayout({
         <main className=" flex h-screen flex-col items-center justify-center ">
           <Provider session={session}>
             <div className="" >
-              <ModalLayout />
+             
               {children}</div>
           </Provider>
           <Toaster />

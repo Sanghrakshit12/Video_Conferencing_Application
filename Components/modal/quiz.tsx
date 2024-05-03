@@ -3,11 +3,11 @@
 import { useSearchParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
-import XXX from "./quiz";
+import Quiz from "./quiz";
 
-export default function Modal() {
+export default function XXX() {
   const searchParams = useSearchParams();
-  const modal = searchParams.get("modal");
+  const quiz = searchParams.get("quiz");
   const pathname = usePathname();
   const [question, setQuestion] = useState("");
   const [option1, setOption1] = useState("");
@@ -17,7 +17,7 @@ export default function Modal() {
 
   return (
     <>
-      {modal && (
+      {quiz && (
         <dialog className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center overflow-auto bg-black bg-opacity-50 backdrop-blur">
           <div className="m-auto bg-white p-8">
             <div className="flex flex-col items-center">
@@ -71,14 +71,7 @@ export default function Modal() {
                   Generate Quiz
                 </button>
               </Link>
-              <XXX />
-              {/* <Quiz
-                question={question}
-                option1={option1}
-                option2={option2}
-                option3={option3}
-                option4={option4}
-              /> */}
+           
               <Link href={pathname}>
                 <button type="button" className="bg-red-500 p-2 text-white">
                   Close Modal
