@@ -50,8 +50,7 @@ export default function SignUpComponent() {
   });
   async function onSubmit(values: z.infer<typeof FormSchema>) {
     try {
-      const headers = { "Content-type": "application/json" };
-      const resposnse = await axios.post(
+      await axios.post(
         "api/user",
         {
           Name: values.Name,
@@ -64,7 +63,7 @@ export default function SignUpComponent() {
         title: "Hello From NexMeet",
         description: "Sign Up Successful",
       });
-      router.push("/signin");
+      router.push("/admin");
     } catch (err) {
       console.log(err);
       toast({
@@ -143,7 +142,7 @@ export default function SignUpComponent() {
         or
       </div>
 
-      <p className="mt-2 text-center text-sm text-gray-600">
+      <p className="mt-2 text-center text-sm font-semibold text-gray-600">
         If you have an account, please&nbsp;
         <Link className="text-blue-800 hover:underline" href="/signin">
           <b>Sign In</b>

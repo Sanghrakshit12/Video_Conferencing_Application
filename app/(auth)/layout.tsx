@@ -8,10 +8,12 @@ interface Auth_LayoutProps {
 }
 
 const Auth_Layout: FC<Auth_LayoutProps> = ({ children }) => {
-  return <>
-   <Navbar />
-  <div className="rounded-md bg-blue-500 p-10">{children}</div>
-  </>
+  return (
+    <>
+      <Navbar />
+      <div className="rounded-md bg-blue-500 p-10">{children}</div>
+    </>
+  );
 };
 
 export default Auth_Layout;

@@ -4,6 +4,7 @@ import {
   StreamCall,
   StreamTheme,
   useCallStateHooks,
+  useStreamVideoClient,
 } from "@stream-io/video-react-sdk";
 import { Loader2 } from "lucide-react";
 import useLoadCall from "../hook/useLoadCall";
@@ -35,13 +36,13 @@ export default function MeetingPage({ id }: MeetingPageProps) {
   if (notALlowed) {
     return (
       <div className="flex items-center justify-center">
-      <div className="max-w-lg rounded-lg bg-white p-8 shadow-md">
-        <p className="text-center">
-        You Are Not Allowed To Join This Meeting
-          <span className="font-bold text-red-600"> - NexMeet</span>
-        </p>
+        <div className="max-w-lg rounded-lg bg-white p-8 shadow-md">
+          <p className="text-center">
+            You Are Not Allowed To Join This Meeting
+            <span className="font-bold text-red-600"> - NexMeet</span>
+          </p>
+        </div>
       </div>
-    </div>
     );
   }
   return (

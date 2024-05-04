@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import getToken from "../actions";
+
 interface ClientProviderProps {
   children: React.ReactNode;
 }
@@ -29,12 +30,12 @@ function useInitializeVideoClient() {
   const [videoClient, setVideoClient] = useState<StreamVideoClient | null>(
     null,
   );
+
   useEffect(() => {
     if (!session) {
       setVideoClient(null);
-      return () => {};
+      return;
     }
-    console.log("from client", session);
     const streamUser: User = {
       id: session.user.id,
       name: session.user.name!,
@@ -47,14 +48,13 @@ function useInitializeVideoClient() {
     const client = new StreamVideoClient({
       apiKey,
       user: streamUser,
-      tokenProvider: getToken,
+      tokenProvider: session ? getToken : undefined,
     });
     setVideoClient(client);
     return () => {
       client.disconnectUser();
       setVideoClient(null);
     };
-  }, [session]);
-
+  }, [session, session?.user.id, session?.user.name]);
   return videoClient;
 }

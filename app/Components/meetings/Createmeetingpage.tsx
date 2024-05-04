@@ -15,7 +15,7 @@ import DescriptionInput from "./DescriptionInput";
 import StartTimeInput from "./StartTimeInput";
 import ParticipantInput from "./ParticipantInput";
 import MeetingLink from "./MeetingLink";
-
+import { RecordSettingsRequestModeEnum } from "@stream-io/video-react-sdk";
 
 export default function CreateMeetingPage() {
   const { data: session } = useSession();
@@ -53,6 +53,14 @@ export default function CreateMeetingPage() {
           starts_at,
           members,
           custom: { description: description },
+        },
+      });
+      await call.update({
+        custom: { color: "green" },
+        settings_override: {
+          recording: {
+            mode: RecordSettingsRequestModeEnum.DISABLED,
+          },
         },
       });
       setCall(call);

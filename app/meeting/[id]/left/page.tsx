@@ -1,4 +1,4 @@
-import { buttonVariants } from "../../../Components/ui/button"
+import { buttonVariants } from "../../../Components/ui/button";
 import Link from "next/link";
 
 interface PageProps {
