@@ -27,14 +27,24 @@ const AuthButtons = () => {
     );
   } else {
     return (
-      <div>
-        <Link
-          href={"/signin"}
-          className={buttonVariants({ variant: "outline" })}
-        >
-          Register
-        </Link>
-      </div>
+      <>
+        <div className="px-2">
+          <Link
+            href={"/signin"}
+            className={buttonVariants({ variant: "outline" })}
+          >
+            Sign In
+          </Link>
+        </div>
+        <div className="px-2">
+          <Link
+            href={"/signup"}
+            className={buttonVariants({ variant: "outline" })}
+          >
+            Register
+          </Link>
+        </div>
+      </>
     );
   }
 };

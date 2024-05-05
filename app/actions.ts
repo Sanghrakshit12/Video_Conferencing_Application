@@ -15,7 +15,7 @@ export default async function getToken() {
     }
     const user = session?.user?.id
     if (!user) {
-        throw new Error("ser Not Authenticated")
+        throw new Error("User Not Authenticated")
     }
 
     const streamClient = new StreamClient(streamApiKey, apiSecret)
@@ -23,7 +23,6 @@ export default async function getToken() {
     const issuedAt = Math.floor(Date.now() / 1000) - 60;
 
     const token = streamClient.createToken(session.user.id, expireationTime, issuedAt)
-    console.log("Successfully created Token", token)
     return token
 }
 

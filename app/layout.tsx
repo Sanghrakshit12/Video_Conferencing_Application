@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/Components/navbar";
 import Provider from "./lib/provider";
 import { getServerSession } from "next-auth";
 import { Next_Auth_Config } from "./lib/auth";
-import { Toaster } from "@/Components/ui/toaster";
+import { Toaster } from "./Components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "NexMeet",
@@ -24,7 +23,7 @@ export default async function RootLayout({
       <body className="bg-slate-200">
         <main className=" flex h-screen flex-col items-center justify-center ">
           <Provider session={session}>
-            <div className="" >{children}</div>
+            <div className="">{children}</div>
           </Provider>
           <Toaster />
         </main>

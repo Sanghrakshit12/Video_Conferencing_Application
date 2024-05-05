@@ -1,6 +1,7 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
+
 interface Authtypes {
   children: React.ReactNode;
   session: any;
