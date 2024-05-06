@@ -11,9 +11,14 @@ import { pusherClient } from "@/app/lib/Pusher/client";
 //   roomId: string
 // }
 // in brackets { initialMessages, roomId }: MessagesProps
+interface MessagesProps {
+  text: string;
+  date: string;
+  user?: string;
+}
 
-const Messages = () => {
-  const [incomingMessages, setIncomingMessages] = useState<string[]>([]);
+const Messages = ({}: MessagesProps) => {
+  const [incomingMessages, setIncomingMessages] = useState<MessagesProps[]>([]);
 
   useEffect(() => {
     // subscribe the current room to listen for pusher events.
@@ -27,8 +32,9 @@ const Messages = () => {
     // })
 
     pusherClient.subscribe("private-chat");
-    pusherClient.bind("evt::test", (text: string) => {
-      setIncomingMessages((prev) => [...prev, text]);
+    pusherClient.bind("evt::test", (data: any) => {
+      console.log(data)
+      setIncomingMessages((prevMessages) => [...prevMessages, data]);
     });
 
     return () => {
@@ -42,8 +48,12 @@ const Messages = () => {
       {/* {initialMessages.map((message) => (
         <p key={message.id}>{message.text}</p>
       ))} */}
-      {incomingMessages.map((text, i) => (
-        <p key={i}>{text}</p>
+      {incomingMessages.map((message: any) => (
+        <div key={message.date}>
+          <p>{message.user}</p>
+          <p>{message.date}</p>
+          <p>{message.text}</p>
+        </div>
       ))}
     </div>
   );

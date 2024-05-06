@@ -47,7 +47,6 @@ export default function SignInComponent() {
         redirect: false,
       });
       if (signindata?.error) {
-        console.log(signindata.error);
         toast({
           title: "Oops! Something Went Wrong",
           description: "Error Signing In",
