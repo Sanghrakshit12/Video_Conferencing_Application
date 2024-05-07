@@ -45,14 +45,14 @@ function useInitializeVideoClient() {
     if (!apiKey) {
       throw new Error("Stream API Key or Secret not Set");
     }
-    const client = new StreamVideoClient({
+    const videoClient = new StreamVideoClient({
       apiKey,
       user: streamUser,
       tokenProvider: session ? getToken : undefined,
     });
-    setVideoClient(client);
+    setVideoClient(videoClient);
     return () => {
-      client.disconnectUser();
+      videoClient.disconnectUser();
       setVideoClient(null);
     };
   }, [session, session?.user.id, session?.user.name]);
