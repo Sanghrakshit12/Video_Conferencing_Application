@@ -2,6 +2,8 @@ import MeetingButton from "./Components/meetings/meetingbutton";
 import Navbar from "./Components/navbar";
 import onlineMeeting from "../public/online-meeting.png";
 import Image from "next/image";
+import MessageField from "./Components/pushers/MessageField";
+import Messages from "./Components/pushers/Messages";
 
 export default function Home() {
   return (
@@ -21,6 +23,8 @@ export default function Home() {
               in-person interactions
             </p>
           </div>
+          <MessageField />
+          <Messages />
           <div className="flex justify-end py-3">
             <MeetingButton
               classes={"text-xl px-8 py-4 hover:scale-105 transition-all"}
