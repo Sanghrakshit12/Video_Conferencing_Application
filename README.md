@@ -19,12 +19,12 @@ NexMeet is built using the following technologies:
 
 - **Next.js**: A full-stack framework for building modern web applications.
 - **NextAuth.js**: Provides authentication functionality for Next.js applications.
-- **getStream.io**: Stream API for real-time messaging and video calls.
+- **Stream Video SDK**: provides robust APIs for integrating real-time messaging and video calls into your applications.
 - **Vercel**: Cloud deployment platform for hosting Next.js applications.
 - **Postgres**: SQL database for storing application data.
 - **Prisma**: ORM for interfacing with the Postgres database.
 - **Tailwind CSS**: A utility-first CSS framework for styling web applications.
-- **Supabase**: Postgres database with built-in authentication and real-time capabilities.
+- **Supabase**: Postgres database.
 - **Zod**: Validation library for TypeScript applications.
 
 ## Application Features
@@ -33,14 +33,10 @@ NexMeet offers a wide range of features to enhance the virtual collaboration exp
 
 - **Video Calling**: Conduct both public and private video calls with ease.
 - **Authentication & Session Creation**: Securely authenticate users and create sessions for online meetings.
-- **Chatting**: Real-time messaging functionality for seamless communication.
-- **File Sharing**: Share files and documents during meetings for enhanced collaboration.
 - **Screen Sharing**: Share your screen to present information or demonstrate concepts.
-- **Real-Time Student Evaluation**: Monitor student participation and engagement in real-time.
 - **Audio and Video Control**: Manage audio and video settings during meetings.
 - **Emoji Reaction**: Express reactions and emotions using emojis.
 - **Layout Modification**: Customize the layout of the meeting interface for better usability.
-- **Attention Tracking**: Monitor participant attention during meetings for improved engagement.
 - **Attendance Monitoring**: Track and monitor student attendance during online classes.
 
 ## Getting Started
